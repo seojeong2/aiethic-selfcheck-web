@@ -76,7 +76,16 @@
           >
         </div>
 
-        <div v-if="resultsVisible" ref="unanswerdList">
+        <UnansweredList
+          :resultsVisible="resultsVisible"
+          :allAnswered="allAnswered"
+          :unansweredQuestions="unansweredQuestions"
+          :yesCount="yesCount"
+          :noCount="noCount"
+          :goToQuestionPage="goToQuestionPage"
+        />
+
+        <!-- <div v-if="resultsVisible" ref="unanswerdList">
           <h3 v-if="!allAnswered">응답하지 않았습니다.</h3>
           <ul v-if="!allAnswered">
             <li v-for="question in unansweredQuestions" :key="question.id">
@@ -87,7 +96,7 @@
           </ul>
           <p v-if="allAnswered">Yes: {{ yesCount }}</p>
           <p v-if="allAnswered">No: {{ noCount }}</p>
-        </div>
+        </div> -->
       </div>
     </section>
   </div>
@@ -98,6 +107,7 @@ import { computed, ref } from "vue";
 // import { BootstrapVue, BootStrapVueIcons } from "bootstrap-vue";
 
 import checklists from "../data/checklists.js";
+import UnansweredList from "./UnanswerdList.vue";
 
 const checklistsRef = ref(checklists);
 const unanswerdList = ref(null);
