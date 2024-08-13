@@ -13,66 +13,70 @@
           Here are some of out FAQs. If you have any other quesitons you'd like
           answered please feel free to email us.
         </p>
-        <div class="flex flex-col ...">
+        <div class="container">
           <div
-            class="question-box"
+            class="question-card"
             v-for="checklist in paginationQuestions"
             :key="checklist.id"
           >
-            <p
-              class="bg-slate-50 font-theme-content text-md lg:text-lg py-5 text-gray-500 text-justify"
-            >
+            <p class="question-text">
               {{ checklist.question }}
             </p>
 
-            <label>
-              <input
-                type="radio"
-                value="yes"
-                v-model="answerMap[checklist.id]"
-                :name="'answer-' + checklist.id"
-              />
-              예
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="no"
-                v-model="answerMap[checklist.id]"
-                :name="'answer-' + checklist.id"
-              />
-              아니오
-            </label>
+            <div class="options">
+              <label class="option">
+                <input
+                  type="radio"
+                  value="yes"
+                  v-model="answerMap[checklist.id]"
+                  :name="'answer-' + checklist.id"
+                />
+                예
+              </label>
+              <label class="option">
+                <input
+                  type="radio"
+                  value="no"
+                  v-model="answerMap[checklist.id]"
+                  :name="'answer-' + checklist.id"
+                />
+                아니오
+              </label>
+            </div>
           </div>
         </div>
 
         <div class="navigation">
-          <Button
-            btnType="primary"
-            @click="prevPage"
-            :disabled="currentPage === 1"
-          >
-            이전</Button
-          >
+          <div class="left-button">
+            <Button
+              btnType="primary"
+              @click="prevPage"
+              :disabled="currentPage === 1"
+            >
+              이전</Button
+            >
 
-          <span>Page {{ currentPage }} of {{ totalPages }}</span>
-          <!-- <button @click="nextPage" :disabled="currentPage === totalPages">
-            Next
-          </button> -->
+            <span> {{ currentPage }} / {{ totalPages }}</span>
+
+            <Button
+              btnType="primary"
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+            >
+              다음</Button
+            >
+          </div>
+
           <Button
-            btnType="primary"
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-          >
-            다음</Button
+            btyType="primary"
+            @click="checkResults"
+            v-if="currentPage === totalPages"
+            class="right-button"
+            >결과 보기</Button
           >
         </div>
 
-        <button @click="checkResults" v-if="currentPage === totalPages">
-          결과 보기
-        </button>
-
-        <div v-if="resultsVisible">
+        <div v-if="resultsVisible" ref="unanswerdList">
           <h3 v-if="!allAnswered">응답하지 않았습니다.</h3>
           <ul v-if="!allAnswered">
             <li v-for="question in unansweredQuestions" :key="question.id">
@@ -91,10 +95,12 @@
 
 <script setup>
 import { computed, ref } from "vue";
+// import { BootstrapVue, BootStrapVueIcons } from "bootstrap-vue";
 
 import checklists from "../data/checklists.js";
 
 const checklistsRef = ref(checklists);
+const unanswerdList = ref(null);
 const questionsPerPage = 5;
 const currentPage = ref(1);
 const resultsVisible = ref(false);
@@ -106,6 +112,17 @@ const answerMap = ref(
     return acc;
   }, {})
 );
+
+const checkResults = () => {
+  resultsVisible.value = true;
+
+  // 포커스 이동
+  nextTick(() => {
+    if (unansweredList.value) {
+      unansweredList.value.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+};
 
 const totalPages = computed(() =>
   Math.ceil(checklistsRef.value.length / questionsPerPage)
@@ -150,10 +167,6 @@ const unansweredQuestions = computed(() => {
 
 const allAnswered = computed(() => unansweredQuestions.value.length === 0);
 
-const checkResults = () => {
-  resultsVisible.value = true;
-};
-
 // 응답되지 않은 질문 페이지로 이동
 const goToQuestionPage = (questionId) => {
   // 질문 ID에 해당하는 페이지를 찾기
@@ -166,20 +179,113 @@ const goToQuestionPage = (questionId) => {
 </script>
 <style scoped>
 .question-box {
+  margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
   /* background-color: bisque; */
-  border-color: bisque;
+
   height: 120px;
 }
 
 .navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 1rem;
+  position: relative;
+}
+
+.navigation > span {
+  margin: 0 15px;
+}
+
+.left-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-button {
+  position: absolute;
+  right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.question-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: center; */
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 130px;
+  max-width: 600px; /* 원하는 최대 너비로 설정하세요 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.question-text {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  padding-top: 10px;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.option input[type="radio"] {
+  accent-color: #007bff;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+}
+
+.prev {
+  border-width: 10px 15px 10px 0;
+  border-right-color: #007bff; /* 화살표 색상 설정 */
+}
+
+.next {
+  border-width: 10px 0 10px 15px;
+  border-left-color: #007bff; /* 화살표 색상 설정 */
+}
+
+.arrow:disabled {
+  border-color: transparent;
+  cursor: not-allowed; /* 비활성화 상태일 때 커서 변경 */
+  opacity: 0.5; /* 비활성화 상태일 때 투명도 조정 */
 }
 </style>

@@ -18,9 +18,8 @@ let isOpen = ref(1);
         <p
           class="text-theme-grayish-blue text-center mt-7 font-theme-content text-lg"
         >
-          Our aim is to make it quick and easy for you to access your favourite
-          websites. Your bookmarks sync between your devices so you can access
-          them on the go.
+          AI기술이 발전할 수록 AI 이해관계자들이 준수해야 할 보편적 사회 규범 및
+          관련 기술인 인공지능 윤리에 대한 관심도 함께 높아지고 있습니다.
         </p>
       </div>
 

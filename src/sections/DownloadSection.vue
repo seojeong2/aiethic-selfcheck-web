@@ -12,21 +12,17 @@ import downloads from "../data/downloads";
         >
           AI 윤리진단
         </h2>
-        <p
+        <!-- <p
           class="text-theme-grayish-blue text-center text-lg font-theme-content mt-7"
         >
           We've got more browsers in pipeline. Please do let us know if you've
           got a favourite you'd like us to prioritize.
-        </p>
+        </p> -->
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mt-12">
+      <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
         <div
           v-for="(download, index) in downloads"
           :key="download.id"
-          :class="[
-            index === 0 ? 'lg:mb-10' : '',
-            index === 1 ? 'lg:mt-10' : '',
-          ]"
           class="shadow-lg rounded-lg"
         >
           <div class="flex justify-center mt-12">
@@ -49,7 +45,7 @@ import downloads from "../data/downloads";
           </div> -->
           <div class="flex justify-center mb-8">
             <LinkButton btn-type="primary" :link="download.link" class="text-sm"
-              >Add & Install Extension</LinkButton
+              >진단하러 가기</LinkButton
             >
           </div>
         </div>

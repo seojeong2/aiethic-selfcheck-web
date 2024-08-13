@@ -13,7 +13,8 @@ let toggleMobileNav = () => {
   <div class="container mx-auto px-5">
     <header class="flex justify-between py-12 items-center">
       <div>
-        <a href="/"><img src="/images/logo-bookmark.svg" alt="Site Logo" /></a>
+        <!-- <a href="/"><img src="/images/logo-bookmark.svg" alt="Site Logo" /></a> -->
+        <a href="/"><h3>AIESC</h3></a>
       </div>
 
       <nav class="flex justify-end flex-col md:flex-row">
@@ -48,13 +49,13 @@ let toggleMobileNav = () => {
           <li
             class="uppercase hover:text-theme-secondary transition duration-200"
           >
-            <a href="#subscribe" v-smooth-scroll>Subscribe</a>
+            <a href="#faq" v-smooth-scroll>문의</a>
           </li>
-          <li
+          <!-- <li
             class="uppercase bg-theme-secondary px-6 py-2 text-white rounded shadow-md hover:bg-white border-2 border-transparent hover:border-theme-secondary hover:text-theme-secondary cursor-pointer transition duration-200"
           >
             <a href="#download-section" v-smooth-scroll>Download</a>
-          </li>
+          </li> -->
         </ul>
       </nav>
     </header>
