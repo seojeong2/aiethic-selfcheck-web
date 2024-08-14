@@ -29,7 +29,7 @@ import proslist from "../data/proslist";
           </h3>
 
           <div class="flex justify-center mt-12">
-            <img :src="pros.icon" alt="Browser Logo" />
+            <img :src="pros.icon" alt="Browser Logo" style="height: 120px" />
           </div>
           <div class="px-4">
             <p

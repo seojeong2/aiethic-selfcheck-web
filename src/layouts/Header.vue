@@ -13,8 +13,11 @@ let toggleMobileNav = () => {
   <div class="container mx-auto px-5">
     <header class="flex justify-between py-12 items-center">
       <div>
+        <a href="/"
+          ><img src="/images/logo.png" alt="Site Logo" style="height: 50px"
+        /></a>
         <!-- <a href="/"><img src="/images/logo-bookmark.svg" alt="Site Logo" /></a> -->
-        <a href="/"><h3>AIESC</h3></a>
+        <!-- <a href="/"><h3>AIESC</h3></a> -->
       </div>
 
       <nav class="flex justify-end flex-col md:flex-row">

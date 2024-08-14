@@ -26,7 +26,7 @@ import ethicdetails from "../data/ethicdetails";
           class="shadow-lg rounded-lg"
         >
           <div class="flex justify-center mt-12">
-            <img :src="ethic.icon" alt="Browser Logo" />
+            <img :src="ethic.icon" alt="Browser Logo" style="height: 120px" />
           </div>
           <h3
             class="text-2xl font-theme-heading font-medium text-center text-blue-500 mt-6"
