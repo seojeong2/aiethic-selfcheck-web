@@ -35,43 +35,41 @@ const checklists = [
   },
   {
     id: 6,
-    title: "",
-    question:
-      "Ouput modality: Are the output modalities for the model disclosed?",
+    title: "Output modality",
+    question: "Are the output modalities for the model disclosed?",
     type: "Model",
   },
   {
     id: 7,
-    title: "",
+    title: "Model Size",
     question:
-      "Model Size: For all Components of the model, is the associated model size disclosed?",
+      "For all Components of the model, is the associated model size disclosed?",
     type: "Model",
   },
   {
     id: 8,
-    title: "",
+    title: "Data size",
     question:
-      "Data size: For the data used in building the model, is the data size disclosed?",
+      "For the data used in building the model, is the data size disclosed?",
     type: "Upstream",
   },
   {
     id: 9,
-    title: "",
+    title: "Data sources",
     question:
-      "Data Sources: For all data used in building the model, are the data sources disclosed? ",
+      "For all data used in building the model, are the data sources disclosed? ",
     type: "Upstream",
   },
   {
     id: 10,
-    title: "",
-    question:
-      "Input modality: Are the input modalities for the model disclosed?",
+    title: "Input modality",
+    question: "Are the input modalities for the model disclosed?",
     type: "Model",
   },
   {
     id: 11,
-    question:
-      "Ouput modality: Are the output modalities for the model disclosed?",
+    title: "Output modality",
+    question: "Are the output modalities for the model disclosed?",
     type: "Model",
   },
 ];

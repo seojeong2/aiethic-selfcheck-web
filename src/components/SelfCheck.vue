@@ -9,10 +9,7 @@
         </h2>
         <p
           class="text-theme-grayish-blue text-center mt-7 font-theme-content text-lg"
-        >
-          Here are some of out FAQs. If you have any other quesitons you'd like
-          answered please feel free to email us.
-        </p>
+        ></p>
         <div class="container">
           <div
             class="question-card"
@@ -46,7 +43,7 @@
           </div>
         </div>
 
-        <div class="navigation">
+        <!-- <div class="navigation">
           <div class="left-button">
             <Button
               btnType="primary"
@@ -74,14 +71,80 @@
             class="right-button"
             >결과 보기</Button
           >
+        </div> -->
+
+        <div class="navigation flex items-center justify-center mt-4 space-x-4">
+          <!-- 왼쪽 버튼들 -->
+          <div class="left-button flex items-center space-x-4">
+            <button
+              @click="prevPage"
+              :disabled="currentPage === 1"
+              class="flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition duration-200"
+            >
+              <!-- 이전 버튼에 화살표 아이콘 추가 -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span class="ml-2">이전</span>
+            </button>
+
+            <span class="text-lg font-semibold"
+              >{{ currentPage }} / {{ totalPages }}</span
+            >
+
+            <button
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+              class="flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition duration-200"
+            >
+              <span class="mr-2">다음</span>
+              <!-- 다음 버튼에 화살표 아이콘 추가 -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- 결과 보기 버튼 -->
+          <button
+            @click="checkResults"
+            v-if="currentPage === totalPages"
+            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200 absolute right-0"
+          >
+            결과 보기
+          </button>
         </div>
 
         <UnansweredList
           :resultsVisible="resultsVisible"
           :allAnswered="allAnswered"
           :unansweredQuestions="unansweredQuestions"
-          :yesCount="yesCount"
-          :noCount="noCount"
+          :yesCountByType="yesCountByType"
+          :noCountByType="noCountByType"
+          :currentPage="currentPage"
+          :totalPages="totalPages"
           :goToQuestionPage="goToQuestionPage"
         />
 
@@ -103,14 +166,14 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, nextTick } from "vue";
 // import { BootstrapVue, BootStrapVueIcons } from "bootstrap-vue";
 
 import checklists from "../data/checklists.js";
 import UnansweredList from "./UnanswerdList.vue";
 
 const checklistsRef = ref(checklists);
-const unanswerdList = ref(null);
+const unansweredList = ref(null);
 const questionsPerPage = 5;
 const currentPage = ref(1);
 const resultsVisible = ref(false);
@@ -157,16 +220,28 @@ const prevPage = () => {
   }
 };
 
-// 선택된 답변 카운트 계산
-const yesCount = computed(() => {
-  return Object.values(answerMap.value).filter((answer) => answer === "yes")
-    .length;
-});
+// 특정 타입에 대한 응답 카운트 계산
+const getCountByType = (type, response) => {
+  return Object.values(answerMap.value).filter((answer, index) => {
+    const question = checklistsRef.value[index];
+    return question.type === type && answer === response;
+  }).length;
+};
 
-const noCount = computed(() => {
-  return Object.values(answerMap.value).filter((answer) => answer === "no")
-    .length;
-});
+// 각 타입별 예/아니오 응답 카운트
+const yesCountByType = (type) => getCountByType(type, "yes");
+const noCountByType = (type) => getCountByType(type, "no");
+
+// 선택된 답변 카운트 계산
+// const yesCount = computed(() => {
+//   return Object.values(answerMap.value).filter((answer) => answer === "yes")
+//     .length;
+// });
+
+// const noCount = computed(() => {
+//   return Object.values(answerMap.value).filter((answer) => answer === "no")
+//     .length;
+// });
 
 // 응답되지 않은 질문 확인
 const unansweredQuestions = computed(() => {
@@ -175,7 +250,9 @@ const unansweredQuestions = computed(() => {
   );
 });
 
-const allAnswered = computed(() => unansweredQuestions.value.length === 0);
+const allAnswered = computed(() => {
+  return unansweredQuestions.value.length === 0;
+});
 
 // 응답되지 않은 질문 페이지로 이동
 const goToQuestionPage = (questionId) => {

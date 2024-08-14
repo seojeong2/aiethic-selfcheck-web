@@ -1,12 +1,28 @@
 <script setup>
+import { nextTick, watch } from "vue";
 const props = defineProps({
   resultsVisible: Boolean,
   allAnswered: Boolean,
   unansweredQuestions: Array,
-  yesCount: Number,
-  noCount: Number,
+  yesCountByType: Function,
+  noCountByType: Function,
+  currentPage: Number,
+  totalPages: Number,
   goToQuestionPage: Function,
 });
+
+watch(
+  () => props.unansweredQuestions,
+  async (newVal, oldVal) => {
+    if (newVal.length === 0 && oldVal.length > 0) {
+      // 모든 질문이 응답되었을 때 DOM 업데이트를 기다림
+      await nextTick();
+    }
+  }
+);
+
+// 질문타입 목록
+const questionTypes = ["UpStream", "Model", "DownStream"];
 </script>
 
 <template>
@@ -35,9 +51,26 @@ const props = defineProps({
         </button>
       </li>
     </ul>
-    <div v-if="allAnswered" class="text-center mt-4">
+
+    <!-- 타입별 응답 개수 -->
+    <div
+      v-if="allAnswered && currentPage === totalPages"
+      class="text-center mt-4"
+    >
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">타입별 응답 현황</h3>
+      <div v-for="type in questionTypes" :key="type" class="mb-2">
+        <p class="text-green-600 font-bold">
+          {{ type }} - 예: {{ yesCountByType(type) }}
+        </p>
+        <p class="text-red-600 font-bold">
+          {{ type }} - 아니오: {{ noCountByType(type) }}
+        </p>
+      </div>
+    </div>
+
+    <!-- <div v-if="allAnswered" class="text-center mt-4">
       <p class="text-green-600 font-bold">Yes: {{ yesCount }}</p>
       <p class="text-red-600 font-bold">No: {{ noCount }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
