@@ -147,19 +147,6 @@
           :totalPages="totalPages"
           :goToQuestionPage="goToQuestionPage"
         />
-
-        <!-- <div v-if="resultsVisible" ref="unanswerdList">
-          <h3 v-if="!allAnswered">응답하지 않았습니다.</h3>
-          <ul v-if="!allAnswered">
-            <li v-for="question in unansweredQuestions" :key="question.id">
-              <button @click="goToQuestionPage(question.id)">
-                Question {{ question.id }}: {{ question.question }}
-              </button>
-            </li>
-          </ul>
-          <p v-if="allAnswered">Yes: {{ yesCount }}</p>
-          <p v-if="allAnswered">No: {{ noCount }}</p>
-        </div> -->
       </div>
     </section>
   </div>
@@ -171,12 +158,15 @@ import { computed, ref, nextTick } from "vue";
 
 import checklists from "../data/checklists.js";
 import UnansweredList from "./UnanswerdList.vue";
+import { useRouter } from "vue-router";
 
 const checklistsRef = ref(checklists);
 const unansweredList = ref(null);
 const questionsPerPage = 5;
 const currentPage = ref(1);
 const resultsVisible = ref(false);
+
+const router = useRouter();
 
 // 동적 응답 데이터 생성
 const answerMap = ref(
@@ -187,14 +177,37 @@ const answerMap = ref(
 );
 
 const checkResults = () => {
-  resultsVisible.value = true;
+  if (unansweredQuestions.value.length > 0) {
+    resultsVisible.value = true;
 
-  // 포커스 이동
-  nextTick(() => {
-    if (unansweredList.value) {
-      unansweredList.value.scrollIntoView({ behavior: "smooth" });
-    }
-  });
+    // 응답하지 않은 항목으로 스크롤
+    nextTick(() => {
+      if (unansweredList.value) {
+        unansweredList.value.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  } else {
+    // 응답이 모두 완료되면 Chart 생성 페이지로 이동
+    const yesCounts = {
+      Upstream: yesCountByType("Upstream"),
+      Model: yesCountByType("Model"),
+      DownStream: yesCountByType("DownStream"),
+    };
+
+    const noCounts = {
+      Upstream: noCountByType("Upstream"),
+      Model: noCountByType("Model"),
+      DownStream: noCountByType("DownStream"),
+    };
+
+    router.push({
+      name: "MakeChart",
+      query: {
+        yesCount: JSON.stringify(yesCounts),
+        noCount: JSON.stringify(noCounts),
+      },
+    });
+  }
 };
 
 const totalPages = computed(() =>
@@ -231,17 +244,6 @@ const getCountByType = (type, response) => {
 // 각 타입별 예/아니오 응답 카운트
 const yesCountByType = (type) => getCountByType(type, "yes");
 const noCountByType = (type) => getCountByType(type, "no");
-
-// 선택된 답변 카운트 계산
-// const yesCount = computed(() => {
-//   return Object.values(answerMap.value).filter((answer) => answer === "yes")
-//     .length;
-// });
-
-// const noCount = computed(() => {
-//   return Object.values(answerMap.value).filter((answer) => answer === "no")
-//     .length;
-// });
 
 // 응답되지 않은 질문 확인
 const unansweredQuestions = computed(() => {

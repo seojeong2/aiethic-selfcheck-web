@@ -29,13 +29,13 @@ const questionTypes = ["UpStream", "Model", "DownStream"];
   <div
     v-if="resultsVisible"
     ref="unansweredList"
-    class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-5"
+    class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-5"
   >
     <h3
       v-if="!allAnswered"
       class="text-xl font-semibold text-gray-800 mb-4 text-center"
     >
-      응답하지 않았습니다.
+      다음 항목에 응답하지 않았습니다.
     </h3>
     <ul v-if="!allAnswered" class="space-y-2">
       <li
@@ -53,7 +53,7 @@ const questionTypes = ["UpStream", "Model", "DownStream"];
     </ul>
 
     <!-- 타입별 응답 개수 -->
-    <div
+    <!-- <div
       v-if="allAnswered && currentPage === totalPages"
       class="text-center mt-4"
     >
@@ -66,7 +66,7 @@ const questionTypes = ["UpStream", "Model", "DownStream"];
           {{ type }} - 아니오: {{ noCountByType(type) }}
         </p>
       </div>
-    </div>
+    </div> -->
 
     <!-- <div v-if="allAnswered" class="text-center mt-4">
       <p class="text-green-600 font-bold">Yes: {{ yesCount }}</p>
