@@ -1,4 +1,59 @@
 <template>
+  <div
+    class="container mx-auto px-5 overflow-x-hidden lg:overflow-x-visible bg-blue-50 grid grid-cols-1 md:grid-cols-3 gap-4"
+  >
+    <div
+      class="chart-container bg-white p-4 rounded shadow"
+      style="min-height: 200px"
+    >
+      <h3
+        class="text-2xl md:text-3xl font-theme-heading font-medium text-center"
+      >
+        Upstream
+      </h3>
+      <div
+        class="max-w-screen-sm mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
+      >
+        <!-- Chart 1 -->
+        <canvas id="upstream_detail_chart"></canvas>
+      </div>
+    </div>
+
+    <div
+      class="chart-container bg-white p-4 rounded shadow"
+      style="min-height: 150px"
+    >
+      <h3
+        class="text-2xl md:text-3xl font-theme-heading font-medium text-center"
+      >
+        Model
+      </h3>
+      <!-- Chart 2 -->
+      <div
+        class="max-w-screen-sm mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
+      >
+        <canvas id="model_detail_chart"></canvas>
+      </div>
+    </div>
+
+    <div
+      class="chart-container bg-white p-4 rounded shadow"
+      style="min-height: 150px"
+    >
+      <h3
+        class="text-2xl md:text-3xl font-theme-heading font-medium text-center"
+      >
+        DownStream
+      </h3>
+      <div
+        class="max-w-screen-sm mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
+      >
+        <!-- Chart 3 -->
+        <canvas id="downstream_detail_chart"></canvas>
+      </div>
+    </div>
+  </div>
+
   <div class="container mx-auto px-5 md:w-4/5">
     <section class="py-16 pt-18">
       <div class="w-4/5 md:w-4/5 mx-auto">
@@ -16,60 +71,7 @@
     </section>
   </div>
 
-  <div
-    class="container mx-auto px-5 overflow-x-hidden lg:overflow-x-visible bg-blue-50 grid grid-cols-1 md:grid-cols-3 gap-4"
-  >
-    <div
-      class="chart-container bg-white p-4 rounded shadow"
-      style="min-height: 200px"
-    >
-      <h3
-        class="text-2xl md:text-3xl font-theme-heading font-medium text-center"
-      >
-        Upstream
-      </h3>
-      <div
-        class="max-w-screen-sm mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
-      >
-        <!-- Chart 1 -->
-        <canvas id="chart1"></canvas>
-      </div>
-    </div>
-
-    <div
-      class="chart-container bg-white p-4 rounded shadow"
-      style="min-height: 150px"
-    >
-      <h3
-        class="text-2xl md:text-3xl font-theme-heading font-medium text-center"
-      >
-        Model
-      </h3>
-      <!-- Chart 2 -->
-      <div
-        class="max-w-screen-sm mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
-      >
-        <canvas id="chart2"></canvas>
-      </div>
-    </div>
-
-    <div
-      class="chart-container bg-white p-4 rounded shadow"
-      style="min-height: 150px"
-    >
-      <h3
-        class="text-2xl md:text-3xl font-theme-heading font-medium text-center"
-      >
-        DownStream
-      </h3>
-      <div
-        class="max-w-screen-sm mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
-      >
-        <!-- Chart 3 -->
-        <canvas id="chart3"></canvas>
-      </div>
-    </div>
-  </div>
+  <Analysis :yesCount="yesCounts" :noCount="noCounts"></Analysis>
 </template>
 
 <script setup>
@@ -86,6 +88,7 @@ import {
 import { ref, watch } from "vue";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
+import Analysis from "./AnalysisText.vue";
 
 // Chart.js에 필요한 컴포넌트를 등록
 Chart.register(
@@ -169,6 +172,132 @@ const renderChart = () => {
           callbacks: {
             label: function (tooltipItem) {
               return `${tooltipItem.label}: ${tooltipItem.raw}`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  // Upsream 차트
+  const ctx_up = document
+    .getElementById("upstream_detail_chart")
+    .getContext("2d");
+  new Chart(ctx_up, {
+    type: "bar",
+    data: {
+      labels: ["YES", "NO"],
+      datasets: [
+        {
+          label: "Upstream Details",
+          data: [yesCounts.value.Upstream || 0, noCounts.value.Upstream || 0],
+          backgroundColor: ["#b153d9", "#b153d9"],
+          borderColor: ["#b153d9", "#b153d9"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      indexAxis: "y",
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              return `${tooltipItem.lablel}: ${tooltipItem.raw}`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const ctx_model = document
+    .getElementById("model_detail_chart")
+    .getContext("2d");
+
+  new Chart(ctx_model, {
+    type: "bar",
+    data: {
+      labels: ["YES", "NO"],
+      datasets: [
+        {
+          label: "Model Details",
+          data: [yesCounts.value.Model || 0, noCounts.value.Model || 0],
+          backgroundColor: ["#c086d9", "#c086d9"],
+          borderColor: ["#c086d9", "#c086d9"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      indexAxis: "y",
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              return `${tooltipItem.lablel}: ${tooltipItem.raw}`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const ctx_down = document
+    .getElementById("downstream_detail_chart")
+    .getContext("2d");
+
+  new Chart(ctx_down, {
+    type: "bar",
+    data: {
+      labels: ["YES", "NO"],
+      datasets: [
+        {
+          label: "Model Details",
+          data: [
+            yesCounts.value.DownStream || 0,
+            noCounts.value.DownStream || 0,
+          ],
+          backgroundColor: ["#c086d9", "#c086d9"],
+          borderColor: ["#c086d9", "#c086d9"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      indexAxis: "y",
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              return `${tooltipItem.lablel}: ${tooltipItem.raw}`;
             },
           },
         },
