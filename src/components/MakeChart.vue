@@ -63,7 +63,7 @@
           진단 결과
         </h2>
         <div
-          class="max-w-screen-lg mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
+          class="max-w-lg mx-auto px-5 overflow-x-hidden lg:overflow-x-visible"
         >
           <canvas id="surveyChart"></canvas>
         </div>
@@ -84,7 +84,10 @@ import {
   Title,
   Tooltip,
   Legend,
+  PieController,
+  ArcElement,
 } from "chart.js";
+
 import { ref, watch } from "vue";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -92,6 +95,8 @@ import Analysis from "./AnalysisText.vue";
 
 // Chart.js에 필요한 컴포넌트를 등록
 Chart.register(
+  PieController,
+  ArcElement,
   BarController,
   BarElement,
   CategoryScale,
@@ -121,7 +126,7 @@ const noCounts = ref(props.noCount);
 const renderChart = () => {
   const ctx = document.getElementById("surveyChart").getContext("2d");
   new Chart(ctx, {
-    type: "bar",
+    type: "pie",
     data: {
       labels: [
         "upstream - o",
@@ -176,11 +181,11 @@ const renderChart = () => {
           },
         },
       },
-      scales: {
-        x: {
-          beginAtZero: true,
-        },
-      },
+      // scales: {
+      //   x: {
+      //     beginAtZero: true,
+      //   },
+      // },
     },
   });
 

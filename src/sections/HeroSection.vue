@@ -27,7 +27,8 @@
           윤리도 지킬 수 있도록 미리 점검하세요.
         </p>
         <div class="flex justify-center lg:justify-start mt-10">
-          <LinkButton btn-type="primary" to="/selfcheck">진단하기</LinkButton>
+          <!-- <LinkButton btn-type="primary" to="/selfcheck">진단하기</LinkButton> -->
+          <LinkButton btn-type="primary" to="/selecttype">진단하기</LinkButton>
           <LinkButton btn-type="primary" href="#faq">문의하기</LinkButton>
         </div>
       </div>

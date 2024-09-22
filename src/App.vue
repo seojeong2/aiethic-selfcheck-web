@@ -8,9 +8,18 @@ import Footer from "./layouts/Footer.vue";
   <Header />
 
   <!-- <Main/> -->
+  <!-- <div class="main-content"> -->
   <router-view></router-view>
+  <!-- </div> -->
 
   <Footer />
 </template>
 
-<style scoped></style>
+<style scoped>
+.main-content {
+  min-height: calc(100vh - 150px); /* 헤더와 푸터 높이에 따라 조정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 가운데 정렬 */
+}
+</style>
