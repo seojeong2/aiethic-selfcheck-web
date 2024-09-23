@@ -157,12 +157,13 @@ import { computed, ref, nextTick } from "vue";
 // import { BootstrapVue, BootStrapVueIcons } from "bootstrap-vue";
 
 import checklists from "../data/checklists.js";
+import fmtlists from "../data/fmtlist.js";
 import UnansweredList from "./UnanswerdList.vue";
 import { useRouter } from "vue-router";
 
-const checklistsRef = ref(checklists);
+const checklistsRef = ref(fmtlists);
 const unansweredList = ref(null);
-const questionsPerPage = 5;
+const questionsPerPage = 10;
 const currentPage = ref(1);
 const resultsVisible = ref(false);
 
@@ -188,23 +189,37 @@ const checkResults = () => {
     });
   } else {
     // 응답이 모두 완료되면 Chart 생성 페이지로 이동
-    const yesCounts = {
-      Upstream: yesCountByType("Upstream"),
-      Model: yesCountByType("Model"),
-      DownStream: yesCountByType("DownStream"),
-    };
 
-    const noCounts = {
-      Upstream: noCountByType("Upstream"),
-      Model: noCountByType("Model"),
-      DownStream: noCountByType("DownStream"),
-    };
+    const types = ["Upstream", "Model", "DownStream"];
+
+    const yesCounts = {};
+    const noCounts = {};
+
+    types.forEach((type) => {
+      yesCounts[type] = yesCountByType(type);
+      noCounts[type] = noCountByType(type);
+    });
+
+    // const yesCounts = {
+    //   Upstream: yesCountByType("Upstream"),
+    //   Model: yesCountByType("Model"),
+    //   DownStream: yesCountByType("DownStream"),
+    // };
+
+    // const noCounts = {
+    //   Upstream: noCountByType("Upstream"),
+    //   Model: noCountByType("Model"),
+    //   DownStream: noCountByType("DownStream"),
+    // };
 
     router.push({
       name: "MakeChart",
       query: {
         yesCount: JSON.stringify(yesCounts),
         noCount: JSON.stringify(noCounts),
+        types: JSON.stringify(types),
+        aiccYesCounts: JSON.stringify(aiccYesCounts),
+        midmYesCounts: JSON.stringify(midmYesCounts),
       },
     });
   }
@@ -265,6 +280,36 @@ const goToQuestionPage = (questionId) => {
   const page = Math.floor(questionIndex / questionsPerPage) + 1;
   currentPage.value = page;
 };
+
+const types = ["Upstream", "Model", "DownStream"];
+
+// 미리 응답한 AICC, 믿음의 카운트 계산
+const countYesPreResponseByType = (subject, type) => {
+  return checklistsRef.value.reduce((count, question) => {
+    if (question.type === type && Array.isArray(question.response)) {
+      // 타입이 일치하는지 확인
+      const subjectResponse = question.response.find(
+        (res) => res.subject === subject && res.response === "yes"
+      );
+      return subjectResponse ? count + 1 : count;
+    }
+    return count; // 타입이 다르면 카운트하지 않음
+  }, 0);
+};
+
+// 각 타입에 대해 카운트
+const aiccYesCounts = types.reduce((acc, type) => {
+  acc[type] = countYesPreResponseByType("AICC", type);
+  return acc;
+}, {});
+
+const midmYesCounts = types.reduce((acc, type) => {
+  acc[type] = countYesPreResponseByType("믿음", type);
+  return acc;
+}, {});
+
+console.log("AICC의 yes 카운트: ", aiccYesCounts);
+console.log("midm의 yes 카운트: ", midmYesCounts);
 </script>
 <style scoped>
 .question-box {

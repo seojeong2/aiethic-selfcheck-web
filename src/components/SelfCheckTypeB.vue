@@ -157,24 +157,34 @@ const checkResults = () => {
       }
     });
   } else {
-    // 응답이 모두 완료되면 Chart 생성 페이지로 이동
-    const yesCounts = {
-      Upstream: yesCountByType("Upstream"),
-      Model: yesCountByType("Model"),
-      DownStream: yesCountByType("DownStream"),
-    };
+    const types = [
+      "인권보장",
+      "프라이버시 보호",
+      "다양성 존중",
+      "침해금지",
+      "공공성",
+      "연대성",
+      "데이터 관리",
+      "책임성",
+      "투명성·안정성",
+    ];
 
-    const noCounts = {
-      Upstream: noCountByType("Upstream"),
-      Model: noCountByType("Model"),
-      DownStream: noCountByType("DownStream"),
-    };
+    const yesCounts = {};
+    const noCounts = {};
+
+    types.forEach((type) => {
+      yesCounts[type] = yesCountByType(type);
+      noCounts[type] = noCountByType(type);
+    });
 
     router.push({
       name: "MakeChart",
       query: {
         yesCount: JSON.stringify(yesCounts),
         noCount: JSON.stringify(noCounts),
+        types: JSON.stringify(types), // types 배열 추가
+        aiccYesCounts: JSON.stringify(aiccYesCounts),
+        midmYesCounts: JSON.stringify(midmYesCounts),
       },
     });
   }
@@ -235,6 +245,46 @@ const goToQuestionPage = (questionId) => {
   const page = Math.floor(questionIndex / questionsPerPage) + 1;
   currentPage.value = page;
 };
+
+const types = [
+  "인권보장",
+  "프라이버시 보호",
+  "다양성 존중",
+  "침해금지",
+  "공공성",
+  "연대성",
+  "데이터 관리",
+  "책임성",
+  "투명성·안정성",
+];
+
+// 미리 응답한 AICC, 믿음의 카운트 계산
+const countYesPreResponseByType = (subject, type) => {
+  return checklistsRef.value.reduce((count, question) => {
+    if (question.type === type && Array.isArray(question.response)) {
+      // 타입이 일치하는지 확인
+      const subjectResponse = question.response.find(
+        (res) => res.subject === subject && res.response === "yes"
+      );
+      return subjectResponse ? count + 1 : count;
+    }
+    return count; // 타입이 다르면 카운트하지 않음
+  }, 0);
+};
+
+// 각 타입에 대해 카운트
+const aiccYesCounts = types.reduce((acc, type) => {
+  acc[type] = countYesPreResponseByType("AICC", type);
+  return acc;
+}, {});
+
+const midmYesCounts = types.reduce((acc, type) => {
+  acc[type] = countYesPreResponseByType("믿음", type);
+  return acc;
+}, {});
+
+console.log("AICC의 yes 카운트: ", aiccYesCounts);
+console.log("midm의 yes 카운트: ", midmYesCounts);
 </script>
 <style scoped>
 .question-box {

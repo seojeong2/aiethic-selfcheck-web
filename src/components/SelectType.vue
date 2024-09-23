@@ -14,10 +14,10 @@
       <div class="flex justify-center space-x-4 mt-10">
         <!-- 버튼을 중앙에 배치하고 여백 추가 -->
         <button @click="goToTypeA" class="btn-test type-a">
-          유형 A 테스트
+          Foundation Model Transparency
         </button>
         <button @click="goToTypeB" class="btn-test type-b">
-          유형 B 테스트
+          인공지능 자율점검 윤리표
         </button>
       </div>
     </section>
