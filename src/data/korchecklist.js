@@ -55,7 +55,7 @@ const korchecklist = [
     question:
       "인공지능시스템의 개발/운영 과정에서 개인정보를 수집/활용하는 경우, 개인정보 보호법 등 관련 법령 준수에 필요한 개인정보 보호 위원회의 [인공지능(AI) 개인정보보호 자율점검표]에 따른 점검을 수행하였는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "no" },
     ],
   },
@@ -65,7 +65,7 @@ const korchecklist = [
     question:
       "인공지능시스템의 개발/운영 과정에서 사생활의 비밀과 자유를 침해할 우려에 대해 검토하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -75,7 +75,7 @@ const korchecklist = [
     question:
       "인공지능시스템 활용에 사회적 약자의 접근 가능성을 고려하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -85,7 +85,7 @@ const korchecklist = [
     question:
       "인공지능시스템 개발/운영 과정에서 데이터의 성별, 인종, 민족, 국가 등 편향 가능성을 정기적으로 내부 전담부서 혹은 외부 전문가나 기관을 통해 객관적으로 판단하고 이를 최소화하기 위해 노력하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -95,7 +95,7 @@ const korchecklist = [
     question:
       "인공지능시스템의 개발/운영 단계에서 다양한 의견을 청취,검토,평가,반영할 수 있는 일련의 절차를 마련하였는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -105,7 +105,7 @@ const korchecklist = [
     question:
       "인공지능시스템을 사용할 때 편향이나 차별, 소외 등이 발견되거나 발생한 경우, 개발자, 운영자, 사용자 모두 내부 또는 인공지능시스템 개발 조직과 운영업체에 알리고, 이를 내부적으로 검토, 평가, 반영할 수 있는 일련의 절차를 마련하였는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "no" },
     ],
   },
@@ -126,7 +126,7 @@ const korchecklist = [
       "인공지능시스템이 인간의 생명, 신체, 정신 또는 재산에 피해를 발생시킬 우려가 있는지를 사전에 검토하고 이를 예방하기 위한 조치를 취하였는가?",
     response: [
       { subject: "AICC", response: "yes" },
-      { subject: "믿음", response: "yes" },
+      { subject: "믿음", response: "no" },
     ],
   },
   {
@@ -165,7 +165,7 @@ const korchecklist = [
     question:
       "인공지능시스템이 사회경제적으로 미치는 긍정적/부정적 영향에 대하여 내부적으로 검토하거나 외부 전문가의 의견을 청취하였는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -175,7 +175,7 @@ const korchecklist = [
     question:
       "인공지능시스템 사용으로 폭력성, 음란성, 사행성, 중독성이 조장되는 등 부작용이 발생할 개연성이 있는지를 고려하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -195,7 +195,7 @@ const korchecklist = [
     question:
       "인공지능시스템의 사용이 지역,성별,세대,계층 간 갈등을 유발하는 등 사회통합을 저해할 개연성이 있는지를 고려하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -205,7 +205,7 @@ const korchecklist = [
     question:
       "탄소중립을 위한 국제사회의 노력에 협력하기 위해 인공지능 시스템의 개발/운영 과정에서 탄소배출이 적은 방법을 사용하도록 고려하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "no" },
     ],
   },
@@ -245,7 +245,7 @@ const korchecklist = [
     question:
       "인공지능시스템을 개발/운영하는 과정에서 윤리기준 준수를 보장하기 위해 담당자 지정 등 적절한 방안을 마련하였는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "yes" },
     ],
   },
@@ -295,7 +295,7 @@ const korchecklist = [
     question:
       "인공지능시스템과 인간의 상호작용에서 발생할 수 있는 위험(인공지능에 의한 감시, 중독, 과의존 등)을 사전에 평가하고, 이를 완화하기 위해 노력하고 있는가?",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "no" },
     ],
   },
