@@ -73,6 +73,7 @@ const goToTypeB = () => {
   display: flex; /* 내용 중앙 정렬 */
   justify-content: center;
   align-items: center;
+  width: 270px;
 }
 
 .btn-test:hover {
