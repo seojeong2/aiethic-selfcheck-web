@@ -66,3 +66,9 @@
   </footer>
   <!-- Footer End -->
 </template>
+
+<style scoped>
+footer {
+  margin-top: auto; /* 푸터를 자동으로 아래로 이동 */
+}
+</style>

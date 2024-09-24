@@ -204,12 +204,14 @@ const paginationQuestions = computed(() => {
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
 
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
 

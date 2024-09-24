@@ -43,36 +43,6 @@
           </div>
         </div>
 
-        <!-- <div class="navigation">
-          <div class="left-button">
-            <Button
-              btnType="primary"
-              @click="prevPage"
-              :disabled="currentPage === 1"
-            >
-              이전</Button
-            >
-
-            <span> {{ currentPage }} / {{ totalPages }}</span>
-
-            <Button
-              btnType="primary"
-              @click="nextPage"
-              :disabled="currentPage === totalPages"
-            >
-              다음</Button
-            >
-          </div>
-
-          <Button
-            btyType="primary"
-            @click="checkResults"
-            v-if="currentPage === totalPages"
-            class="right-button"
-            >결과 보기</Button
-          >
-        </div> -->
-
         <div class="navigation flex items-center justify-center mt-4 space-x-4">
           <!-- 왼쪽 버튼들 -->
           <div class="left-button flex items-center space-x-4">
@@ -239,12 +209,14 @@ const paginationQuestions = computed(() => {
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
 
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
 

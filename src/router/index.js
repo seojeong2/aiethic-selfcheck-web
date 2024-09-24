@@ -4,7 +4,6 @@ import SelfCheck from "../components/SelfCheck.vue";
 import MakeChart from "../components/MakeChart.vue";
 import SelectType from "../components/SelectType.vue";
 import SelfCheckTypeB from "../components/SelfCheckTypeB.vue";
-import MakeChartTypeB from "../components/MakeChartTypeB.vue";
 
 const routes = [
   {
@@ -37,16 +36,14 @@ const routes = [
     name: "SelfCheckTypeB",
     component: SelfCheckTypeB,
   },
-  {
-    path: "/resultB",
-    name: "MakeChartTypeB",
-    component: MakeChartTypeB,
-  },
 ];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }; // 스크롤을 항상 맨 위로 이동
+  },
 });
 
 export default router;
