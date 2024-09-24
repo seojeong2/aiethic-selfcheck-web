@@ -1,15 +1,15 @@
 const faqs = [
   {
     id: 1,
-    title: "What is bookmark?",
+    title: "AI 윤리란 무엇인가요?",
     description:
-      "A bookmark is a feature that allows users to save the URL of a webpage for quick access later. It acts as a shortcut to the webpage, allowing you to navigate back to it without having to remember or search for the URL. Bookmarks are handy for keeping track of your favorite websites, important articles, or resources that you frequently visit. They help you organize your online content and improve your browsing experience.",
+      "AI 윤리는 인공지능(AI) 기술의 개발과 사용에 있어 도덕적 원칙과 가치를 다루는 분야입니다. 책임성과 투명성, 편향성과 공정성, 프라이버시, 안정성, 인간의 가치 존중 등 이러한 원칙을 기반으로 AI 기술의 발전이 사회에 긍정적인 영향을 미치도록 하는 것입니다.",
   },
   {
     id: 2,
-    title: "How can I request a new browser?",
+    title: "자가진단은 어떻게 진행하나요?",
     description:
-      "To request a new browser, you can visit our official website and navigate to the 'Feedback' or 'Contact Us' section. There, you can submit your request for a new browser version or feature. Additionally, you can participate in our community forums or reach out to our support team with your suggestions. We value user feedback and use it to enhance our products, so your input is essential in shaping the future of our browser.",
+      "Foundation Model Transpareny와 인공지능 자율점검표 두가지 타입을 제공하고 있습니다. 진단한려는 서비스 성격에 맞는 유형을 선택하여 진단을 진행하면 됩니다.",
   },
 ];
 

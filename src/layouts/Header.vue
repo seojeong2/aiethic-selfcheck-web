@@ -6,6 +6,22 @@ let mobileNav = ref(false);
 let toggleMobileNav = () => {
   mobileNav.value = !mobileNav.value;
 };
+
+const followKakaoChannel = () => {
+  Kakao.Channel.addChannel({
+    channelPublicId: "_BJxaln", // 여기에 실제 채널 Public ID 입력
+  })
+    .then(function (response) {
+      console.log(response);
+      // 채널 간편 추가 성공 처리
+      alert("카카오 채널이 추가되었습니다!");
+    })
+    .catch(function (error) {
+      console.error(error);
+      // 채널 간편 추가 실패 처리
+      alert("채널 추가에 실패했습니다. 다시 시도해 주세요.");
+    });
+};
 </script>
 
 <template>
@@ -52,7 +68,8 @@ let toggleMobileNav = () => {
           <li
             class="uppercase hover:text-theme-secondary transition duration-200"
           >
-            <a href="#faq" v-smooth-scroll>문의</a>
+            <!-- <a href="#faq" v-smooth-scroll>문의</a> -->
+            <a @click.prevent="followKakaoChannel">카카오 채널 추가하기</a>
           </li>
           <!-- <li
             class="uppercase bg-theme-secondary px-6 py-2 text-white rounded shadow-md hover:bg-white border-2 border-transparent hover:border-theme-secondary hover:text-theme-secondary cursor-pointer transition duration-200"
