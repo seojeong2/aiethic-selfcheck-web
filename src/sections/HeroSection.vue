@@ -15,7 +15,7 @@
         <br />
 
         <h1
-          class="text-4xl xl:text-5xl font-bold font-theme-heading text-center lg:text-left"
+          class="text-4xl xl:text-5xl font-bold font-theme-heading text-center lg:text-left fade-in"
         >
           AI 윤리 자가진단
         </h1>
@@ -44,3 +44,16 @@
   </div>
   <!-- Hero Section End -->
 </template>
+
+<style scoped>
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+</style>
