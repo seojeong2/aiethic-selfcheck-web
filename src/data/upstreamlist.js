@@ -136,7 +136,7 @@ const upstreamlist = [
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
-      { subject: "믿음", response: "yes" },
+      { subject: "믿음", response: "no" },
     ],
   },
   {
@@ -145,8 +145,8 @@ const upstreamlist = [
       "Are the instructions given to people who perform data labor disclosed?",
     type: "Upstream",
     response: [
-      { subject: "AICC", response: "no" },
-      { subject: "믿음", response: "no" },
+      { subject: "AICC", response: "yes" },
+      { subject: "믿음", response: "yes" },
     ],
   },
   {
@@ -155,7 +155,7 @@ const upstreamlist = [
       "Are the labor protections for people who perform data labor disclosed?",
     type: "Upstream",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "no" },
     ],
   },
@@ -200,7 +200,7 @@ const upstreamlist = [
   },
   {
     id: 21,
-    question: "모델 구축 기간이 공개되나요?",
+    question: "Is the amount of time required to build the model disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -210,7 +210,7 @@ const upstreamlist = [
   {
     id: 22,
     question:
-      "모델을 구축하는데 필요한 기본 하드웨어의 양과 유형이 공개되나요?",
+      "For the primary hardware used to build the model, is the amount and type of hardward disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -219,7 +219,8 @@ const upstreamlist = [
   },
   {
     id: 23,
-    question: "모델 구축에 사용된 하드웨어의 소유자가 공개되나요?",
+    question:
+      "For the primary hardware used in building the model, is the owner of the hardware disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -228,16 +229,18 @@ const upstreamlist = [
   },
   {
     id: 24,
-    question: "모델 구축에 소비된 에너지량이 공개되나요?",
+    question:
+      "Is the amount of energy expended in building the model disclosed?",
     type: "Upstream",
     response: [
-      { subject: "AICC", response: "yes" },
+      { subject: "AICC", response: "no" },
       { subject: "믿음", response: "no" },
     ],
   },
   {
     id: 25,
-    question: "모델 구축시 배출되는 탄소의 양이 공개되나요?",
+    question:
+      "Is the amount of carbon eitted (associated with the energy used) in building the model disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "no" },
@@ -247,7 +250,7 @@ const upstreamlist = [
   {
     id: 26,
     question:
-      "탄소배출 외에 모델 구축으로 인한 더 광범위한 환경 영향이 있나요?",
+      "Are any broader environmental impacts from building the model besides cardbon emissions disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "no" },
@@ -256,17 +259,17 @@ const upstreamlist = [
   },
   {
     id: 27,
-    question: "모델 개발 프로세스의 모든 단계가 공개되나요?",
+    question: "Are all stages in the model development process disclosed?",
     type: "Upstream",
     response: [
-      { subject: "AICC", response: "no" },
+      { subject: "AICC", response: "yes" },
       { subject: "믿음", response: "no" },
     ],
   },
   {
     id: 28,
     question:
-      "설명된 모든 단계에, 관련 학습 목표에 대한 명확한 설명이 있거나 모델 업데이트의 성격에 대한 명확한 특성이 있나요?",
+      "For all stages that are described, is there a clear description of the associated learning objectivies or a clear characterization of the nature of this update to the model?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -275,7 +278,7 @@ const upstreamlist = [
   },
   {
     id: 29,
-    question: "모델 개발에 사용되는 핵심 프레임워크가 공개되어 있나요?",
+    question: "Are the core frameworks used for model development disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -285,7 +288,7 @@ const upstreamlist = [
   {
     id: 30,
     question:
-      "데이터, 컴퓨팅 및 코드 외에 공개된 모델을 구축하기 위해 필요한 것이 있나요?",
+      "Are any dependencies required to build the model disclosed besides data, compute, and code?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -295,7 +298,7 @@ const upstreamlist = [
   {
     id: 31,
     question:
-      "공개된 데이터에서 PII(개인식별정보)의 존재를 완화하기 위해 개발자가 취하는 조치가 있나요?",
+      "Are any steps the developer takes to mitigate the presence of PII in the data disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "yes" },
@@ -305,7 +308,7 @@ const upstreamlist = [
   {
     id: 32,
     question:
-      "공개된 데이터에서 저작권 정보의 존재를 완화하기 위해 개발자가 취하는 조치가 있나요?",
+      "Are any steps the developer takes to mitigate the presence of copyrighted information in the data disclosed?",
     type: "Upstream",
     response: [
       { subject: "AICC", response: "no" },
