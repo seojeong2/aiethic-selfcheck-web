@@ -18,8 +18,7 @@ let isOpen = ref(1);
         <p
           class="text-theme-grayish-blue text-center mt-7 font-theme-content text-lg"
         >
-          Here are some of out FAQs. If you have any other quesitons you'd like
-          answered please feel free to email us.
+          AI윤리에 대해 자주 질문하는 항목들에 대해 확인하세요.
         </p>
       </div>
 
@@ -62,9 +61,9 @@ let isOpen = ref(1);
         <div class="flex justify-center mt-10">
           <LinkButton
             btn-type="primary"
-            link="mailto:seojeong1101@gmail.com?subject=Inquiry"
+            link="https://chatbot.kt-aicc.com/client/ACTIVE/simulator.html?botCode=test_bot&channelId=751177e362814a00937b78f47521eb32&userKey=&callForwardingNumber="
             class="text-sm"
-            >More FAQs</LinkButton
+            >윤리 봇 이용하기</LinkButton
           >
         </div>
       </div>
