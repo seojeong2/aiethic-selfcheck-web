@@ -69,7 +69,7 @@ const followKakaoChannel = () => {
             class="uppercase hover:text-theme-secondary transition duration-200"
           >
             <!-- <a href="#faq" v-smooth-scroll>문의</a> -->
-            <a @click.prevent="followKakaoChannel">카카오 채널 추가하기</a>
+            <a @click.prevent="followKakaoChannel">윤리봇 채널</a>
           </li>
           <!-- <li
             class="uppercase bg-theme-secondary px-6 py-2 text-white rounded shadow-md hover:bg-white border-2 border-transparent hover:border-theme-secondary hover:text-theme-secondary cursor-pointer transition duration-200"
@@ -86,7 +86,7 @@ const followKakaoChannel = () => {
         class="absolute px-5 py-12 block z-30 top-0 left-0 w-full h-full bg-gradient-to-b from-theme-dark-blue via-theme-dark-blue-tp to-theme-dark-blue"
       >
         <div class="flex justify-between items-center">
-          <img src="/images/logo-bookmark-white.svg" alt="Logo" />
+          <!-- <img src="/images/logo.png" alt="Logo" /> -->
           <button
             @click="toggleMobileNav()"
             type="button"
@@ -112,14 +112,14 @@ const followKakaoChannel = () => {
           <li
             class="hover:text-theme-secondary transition duration-200 py-4 border-t border-b border-theme-grayish-blue w-full text-center"
           >
-            <a @click="toggleMobileNav()" href="#features">Features</a>
+            <a @click="toggleMobileNav()" href="#features">AI 윤리소개</a>
           </li>
           <li
             class="hover:text-theme-secondary transition duration-200 py-4 border-b border-theme-grayish-blue w-full text-center"
           >
             <a @click="toggleMobileNav()" href="#faq">FAQ</a>
           </li>
-          <li
+          <!-- <li
             class="hover:text-theme-secondary transition duration-200 py-4 border-b border-theme-grayish-blue w-full text-center"
           >
             <a @click="toggleMobileNav()" href="#subscribe">Subscribe</a>
@@ -128,7 +128,7 @@ const followKakaoChannel = () => {
             class="bg-transparent border-2 rounded px-6 py-2 mt-6 w-full text-center cursor-pointer hover:text-theme-secondary transition duration-200"
           >
             <a @click="toggleMobileNav()" href="#download-section">Download</a>
-          </li>
+          </li> -->
         </ul>
         <div class="flex justify-center items-end h-52">
           <ul class="flex space-x-8">

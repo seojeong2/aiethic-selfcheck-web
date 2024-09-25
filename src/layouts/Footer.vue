@@ -15,17 +15,12 @@
             <li
               class="uppercase text-white hover:text-theme-secondary transition duration-200"
             >
-              <a href="#features" v-smooth-scroll>Features</a>
+              <a href="#features" v-smooth-scroll>소개</a>
             </li>
             <li
               class="uppercase text-white hover:text-theme-secondary transition duration-200"
             >
               <a href="#faq" v-smooth-scroll>FAQ</a>
-            </li>
-            <li
-              class="uppercase text-white hover:text-theme-secondary transition duration-200"
-            >
-              <a href="#download-section" v-smooth-scroll>Download</a>
             </li>
           </ul>
         </div>
